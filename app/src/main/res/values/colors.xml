@@ -1,0 +1,9 @@
+<resources>
+    <color name="bg_dark">#06120b</color>
+    <color name="input_bg">#0f2216</color>
+    <color name="brand_green">#1aff4d</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_gray">#8A9A8E</color>
+    <color name="stroke_color">#2D3D32</color>
+    <color name="purple">#6200EE</color>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#071B12"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="My Allergies"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <!-- Description -->
+        <TextView
+            android:layout_marginTop="16dp"
+            android:text="Select the foods you are allergic to and specify the reaction severity to help our AI protect you."
+            android:textColor="#B7D8C8"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Search / Add Allergen -->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/edtSearch"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:hint="Search or type allergen"
+                android:padding="12dp"
+                android:background="@drawable/search_bg"
+                android:textColor="@android:color/white"
+                android:textColorHint="#9AC9AE"/>
+
+            <Button
+                android:id="@+id/btnAddAllergen"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Add"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/green_button"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <!-- Section -->
+        <TextView
+            android:layout_marginTop="24dp"
+            android:text="Allergens"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Container for dynamic allergen cards -->
+        <LinearLayout
+            android:id="@+id/layoutAllergens"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Save Profile ✓"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:background="@drawable/green_button"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+</ScrollView>
