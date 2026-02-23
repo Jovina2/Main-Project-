@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,42 +11,45 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- Header -->
+        <!-- Back Arrow -->
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/text_white" />
 
+        <!-- Header Title -->
         <TextView
+            android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin Console"
             android:textColor="@color/text_white"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="@id/btnBack"
             app:layout_constraintBottom_toBottomOf="@id/btnBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnBack" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Logo & Hero Section -->
+        <!-- Shield Logo -->
         <ImageView
             android:id="@+id/imgShield"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/splash_logo"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBack"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnBack" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- App Name -->
         <TextView
-            android:id="@+id/tvBrand"
+            android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -53,65 +57,68 @@
             android:textColor="@color/text_white"
             android:textSize="32sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgShield"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgShield" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Admin Badge -->
         <TextView
             android:id="@+id/tvBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/badge_bg"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="4dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
             android:text="● SYSTEM ADMINISTRATOR"
             android:textColor="@color/brand_green"
-            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tvAppName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBrand" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Form Heading -->
+        <!-- Auth Heading -->
         <TextView
-            android:id="@+id/tvHeading"
+            android:id="@+id/tvAuth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="40dp"
             android:text="Authenticated Access"
             android:textColor="@color/text_white"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBadge"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBadge" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Subtext -->
         <TextView
-            android:id="@+id/tvSubtext"
+            android:id="@+id/tvSub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:text="Please enter your administrative credentials to access the Allersafe neural network controls."
             android:textColor="@color/text_gray"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tvAuth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHeading" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Admin ID Input -->
+        <!-- Admin ID Label -->
         <TextView
-            android:id="@+id/lblAdminId"
+            android:id="@+id/tvAdminLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Admin ID"
             android:textColor="@color/text_white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSubtext" />
+            app:layout_constraintTop_toBottomOf="@id/tvSub"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- Admin ID Input -->
         <EditText
-            android:id="@+id/etAdminId"
+            android:id="@+id/etAdmin"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="8dp"
@@ -122,42 +129,45 @@
             android:paddingHorizontal="16dp"
             android:textColor="@color/text_white"
             android:textColorHint="@color/text_gray"
-            app:layout_constraintTop_toBottomOf="@id/lblAdminId" />
+            app:layout_constraintTop_toBottomOf="@id/tvAdminLabel" />
 
-        <!-- Password Input -->
+        <!-- Password Label -->
         <TextView
-            android:id="@+id/lblPassword"
+            android:id="@+id/tvPassLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Password"
             android:textColor="@color/text_white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etAdminId" />
+            app:layout_constraintTop_toBottomOf="@id/etAdmin"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- Password Input -->
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input"
-            android:drawableEnd="@drawable/eye_off"
+            android:drawableEnd="@drawable/eye_off1"
+            android:drawablePadding="12dp"
             android:hint="••••••••"
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
             android:textColor="@color/text_white"
             android:textColorHint="@color/text_gray"
-            app:layout_constraintTop_toBottomOf="@id/lblPassword" />
+            app:layout_constraintTop_toBottomOf="@id/tvPassLabel" />
 
+        <!-- Forgot -->
         <TextView
-            android:id="@+id/btnForgot"
+            android:id="@+id/tvForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Forgot Password?"
             android:textColor="@color/brand_green"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etPassword" />
+            app:layout_constraintTop_toBottomOf="@id/etPassword"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Login Button -->
         <com.google.android.material.button.MaterialButton
@@ -166,53 +176,57 @@
             android:layout_height="56dp"
             android:layout_marginTop="32dp"
             android:text="Secure Login"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="18sp"
             android:textStyle="bold"
-            app:backgroundTint="@color/brand_green"
-            app:cornerRadius="12dp"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            app:cornerRadius="14dp"
             app:icon="@drawable/secure"
             app:iconGravity="textEnd"
             app:iconTint="#000000"
-            app:layout_constraintTop_toBottomOf="@id/btnForgot" />
+            app:backgroundTint="@color/brand_green"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/tvForgot" />
 
-        <!-- Footer -->
+        <!-- Return -->
         <TextView
-            android:id="@+id/btnReturn"
+            android:id="@+id/tvReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:drawablePadding="8dp"
             android:drawableStart="@drawable/ic_mobile"
+            android:drawablePadding="8dp"
             android:text="Return to User App"
             android:textColor="@color/text_gray"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Footer Shield -->
         <ImageView
-            android:id="@+id/imgSecurity"
+            android:id="@+id/imgFooter"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="32dp"
             android:src="@drawable/ic_verified"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/brand_green"
+            app:layout_constraintTop_toBottomOf="@id/tvReturn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnReturn"
-            app:tint="@color/brand_green" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Footer Text -->
         <TextView
+            android:id="@+id/tvFooter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Protected by 256-bit SSLEncryption. Unauthorized\naccess attempts are monitored and logged."
+            android:text="Protected by 256-bit SSL Encryption. Unauthorized access attempts are monitored and logged."
             android:textColor="@color/text_gray"
             android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgFooter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgSecurity" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

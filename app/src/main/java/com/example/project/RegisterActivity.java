@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView txtLogin;
 
     boolean isPasswordVisible = false;
-    private final String REGISTER_URL = "http://10.0.2.2:5000/register";
+    private final String REGISTER_URL = "http://192.168.1.208:5000/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +82,23 @@ public class RegisterActivity extends AppCompatActivity {
         // Create account click
         btnCreateAccount.setOnClickListener(v -> registerUser());
     }
-
+    private void showTopToast(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.setGravity(android.view.Gravity.TOP | android.view.Gravity.CENTER_HORIZONTAL, 0, 100);
+        toast.show();
+    }
     private void registerUser() {
         String name = edtName.getText().toString().trim();
         String email = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+            showTopToast("All fields are required");
             return;
         }
         // Email format validation
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            showTopToast("Invalid email address");
             return;
         }
 

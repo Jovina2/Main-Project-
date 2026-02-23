@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#06120B">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- TOP TITLE -->
+        <TextView
+            android:id="@+id/titleText"
+            android:text="Analysis Complete"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/foodImage"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_card"
+            android:src="@drawable/ic_food"/>
+
+        <!-- HIGH RISK ICON -->
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_warning"
+            android:tint="#FF0000"/>
+
+        <!-- RISK TEXT -->
+        <TextView
+            android:id="@+id/txtRisk"
+            android:text="HIGH RISK DETECTED"
+            android:textColor="#FF3B30"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- DESCRIPTION -->
+        <TextView
+            android:id="@+id/txtMessage"
+            android:text="Ingredients match your severe allergy profile. Do not consume."
+            android:textColor="#AAAAAA"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- CONFIDENCE CARD -->
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:text="AI Confidence Score"
+                    android:layout_weight="1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtConfidence"
+                    android:text="94%"
+                    android:textColor="#1AFF4D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressConfidence"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="12dp"
+                android:progress="94"
+                android:progressTint="#1AFF4D" />
+        </LinearLayout>
+
+        <!-- DETECTED TRIGGERS -->
+        <TextView
+            android:text="Detected Triggers"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Trigger Card -->
+        <LinearLayout
+            android:id="@+id/triggerCard"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtTriggerName"
+                android:text="Cashews"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtTriggerLevel"
+                android:text="Severity: SEVERE"
+                android:textColor="#FF3B30"
+                android:textSize="14sp"
+                android:layout_marginTop="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- PERSONALIZED MESSAGE -->
+        <TextView
+            android:id="@+id/txtPersonalized"
+            android:text="This result is personalized for Alex Doe (Nut Allergy)."
+            android:textColor="#88FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- BUTTONS -->
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnReport"
+                android:text="Report"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:backgroundTint="#333333"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnScanAgain"
+                android:text="Scan New Item"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:backgroundTint="#1AFF4D"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

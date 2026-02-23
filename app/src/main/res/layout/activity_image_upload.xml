@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E2A1A"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Top bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow"
+            android:tint="@android:color/white" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="Scan Meal"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!-- Title -->
+    <TextView
+        android:layout_marginTop="30dp"
+        android:text="Analyze Your Food"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:text="Upload a photo to detect potential allergens."
+        android:textColor="#9AD9AE"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Upload Box -->
+    <FrameLayout
+        android:id="@+id/uploadBox"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/bg_dashed_box"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_camera"
+                android:tint="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Upload Food Image"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Tap to capture or select from library"
+                android:textColor="#7FC79C"
+                android:textSize="13sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Camera / Gallery buttons -->
+    <LinearLayout
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Camera Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCamera"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:text="Camera"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:backgroundTint="#1F4E33"
+            app:icon="@drawable/ic_camera1"
+            app:iconTint="@android:color/white"
+            app:iconPadding="10dp"
+            app:cornerRadius="16dp"/>
+
+        <!-- Gallery Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGallery"
+            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:text="Gallery"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:backgroundTint="#1F4E33"
+            app:icon="@drawable/ic_gallery"
+            app:iconTint="@android:color/white"
+            app:iconPadding="10dp"
+            app:cornerRadius="16dp"/>
+    </LinearLayout>
+
+    <!-- Spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Analyze -->
+    <Button
+        android:id="@+id/btnAnalyze"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Analyze Risk"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#0E2A1A"
+        android:background="@drawable/bg_analyze_button" />
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:text="Powered by AllergyAI. Results are for reference only."
+        android:textColor="#5F8F74"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -31,8 +32,8 @@ public class AllergyActivity extends AppCompatActivity {
     AutoCompleteTextView edtSearch;
     int userId;
 
-    private final String SAVE_ALLERGY_URL = "http://10.0.2.2:5000/save_allergy";
-    private final String GET_ALLERGY_URL = "http://10.0.2.2:5000/get_allergy/";
+    private final String SAVE_ALLERGY_URL = "http://192.168.1.208:5000/save_allergy";
+    private final String GET_ALLERGY_URL = "http://192.168.1.208:5000/get_allergy/";
 
     // Suggestions for common allergens
     private final String[] commonAllergens = {"Peanuts", "Soy", "Milk", "Eggs", "Wheat", "Fish", "Shellfish"};
@@ -90,7 +91,7 @@ public class AllergyActivity extends AppCompatActivity {
         chkAllergy.setText(allergenName);
         chkAllergy.setChecked(true); // default checked when added
 
-        layoutAllergens.addView(card);
+        layoutAllergens.addView(card, 0);
     }
 
     // Load existing allergy profile from backend
@@ -185,15 +186,33 @@ public class AllergyActivity extends AppCompatActivity {
                 body,
                 response -> {
                     try {
-                        Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                AllergyActivity.this,
+                                response.getString("message"),
+                                Toast.LENGTH_SHORT
+                        ).show();
+
+// ✅ Go to Home Dashboard
+                        Intent intent = new Intent(AllergyActivity.this, HomeActivity.class);
+                        intent.putExtra("user_id", userId);
+// Clear allergy screen from back stack
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        finish(); // close AllergyActivity
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(this, "Server error: " + error.getMessage(), Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(
+                        AllergyActivity.this,
+                        "Server error: " + error.getMessage(),
+                        Toast.LENGTH_SHORT
+                ).show()
         );
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
-}
+};

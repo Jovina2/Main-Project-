@@ -2,9 +2,9 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtEmail, edtPassword;
     Button btnLogin;
 
-    // Emulator localhost
-    private final String LOGIN_URL = "http://10.0.2.2:5000/login";
+    private final String LOGIN_URL = "http://192.168.1.208:5000/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,14 @@ public class LoginActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
+
+        TextView txtForgotPassword = findViewById(R.id.txtForgotPassword);
+
+        // ✅ Forgot Password → ResetPasswordActivity
+        txtForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+            startActivity(intent);
+        });
 
         btnLogin.setOnClickListener(v -> loginUser());
     }
@@ -60,37 +67,29 @@ public class LoginActivity extends AppCompatActivity {
                 body,
                 response -> {
                     try {
-                        Log.d("LoginResponse", response.toString());
-
                         String status = response.getString("status");
 
                         if (status.equals("success")) {
-                            // Get user_id from response
                             int userId = response.getInt("user_id");
+                            String name = response.getString("name");
 
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
 
-                            // Go directly to AllergyActivity and pass userId
                             Intent intent = new Intent(LoginActivity.this, AllergyActivity.class);
                             intent.putExtra("user_id", userId);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("name", name);
                             startActivity(intent);
 
+                            finish(); // ✅ close LoginActivity ONLY
                         } else {
-                            // Show error message from backend if exists
-                            String message = response.optString("message", "Invalid email or password");
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(this, "Response parsing error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Response error", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> {
-                    Log.e("LoginError", error.toString());
-                    Toast.makeText(this, "Server error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                error -> Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show()
         );
 
         RequestQueue queue = Volley.newRequestQueue(this);

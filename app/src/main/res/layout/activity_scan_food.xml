@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E2A1A">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close"
+            android:tint="@null" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:text="Scan Product"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btnHelp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_help"
+            android:tint="@null" />
+    </RelativeLayout>
+
+    <!-- AI Active -->
+    <TextView
+        android:id="@+id/txtAI"
+        android:layout_below="@id/topBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="● AI ACTIVE"
+        android:textColor="#1FFF5A"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- CAMERA + SCANNER FRAME -->
+    <FrameLayout
+        android:id="@+id/cameraContainer"
+        android:layout_centerInParent="true"
+        android:layout_width="260dp"
+        android:layout_height="260dp">
+
+        <!-- Camera Preview -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Green Scanner Overlay -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_scanner_frame" />
+
+    </FrameLayout>
+
+    <!-- Instruction -->
+    <TextView
+        android:layout_below="@id/cameraContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Align barcode within the frame"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@id/cameraContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:text="AI will automatically detect and analyze ingredients"
+        android:textColor="#7FC79C"
+        android:textSize="13sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Bottom Controls -->
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnFlash"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_flash"
+            android:tint="@null" />
+
+        <Button
+            android:id="@+id/btnManual"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Enter Code Manually"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_manual_button" />
+
+        <ImageView
+            android:id="@+id/btnHistory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_history"
+            android:tint="@null" />
+    </LinearLayout>
+
+</RelativeLayout>

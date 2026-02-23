@@ -6,8 +6,6 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project.R;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final int SPLASH_TIME = 2500; // 2.5 seconds
@@ -15,15 +13,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 🔥 Prevent splash from reopening during navigation
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         new Handler().postDelayed(() -> {
-
-            // Go to Welcome Screen after splash
-            Intent intent = new Intent(MainActivity.this,WelcomeActivity.class);
+            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(intent);
             finish();
-
         }, SPLASH_TIME);
     }
 }

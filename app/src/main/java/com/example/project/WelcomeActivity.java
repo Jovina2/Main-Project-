@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class
+WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +22,22 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         // Create Account Button
-        findViewById(R.id.btnCreate).setOnClickListener(v ->
-                startActivity(new Intent(this, RegisterActivity.class))
-        );
+        findViewById(R.id.btnCreate).setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+            finish(); //
+        });
 
         // Login Button
-        findViewById(R.id.btnLogin).setOnClickListener(v ->
-                startActivity(new Intent(this, LoginActivity.class))
-        );
+        findViewById(R.id.btnLogin).setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
 
         // Admin Login Button
-        findViewById(R.id.btnAdminLogin).setOnClickListener(v ->
-                startActivity(new Intent(WelcomeActivity.this, AdminActivity.class))
-        );
+        findViewById(R.id.btnAdminLogin).setOnClickListener(v -> {
+            startActivity(new Intent(this, AdminActivity.class));
+            finish(); //
+        });
+
         // Google & Facebook login
         ImageView btnGoogle = findViewById(R.id.btnGoogle);
         ImageView btnFacebook = findViewById(R.id.btnFacebook);
@@ -46,24 +50,21 @@ public class WelcomeActivity extends AppCompatActivity {
         makeTermsClickable(txtTerms);
     }
 
-
     private void makeTermsClickable(TextView textView) {
         String text = "By continuing, you agree to our Terms of Service and Privacy Policy.";
         SpannableString spannable = new SpannableString(text);
 
-        // Terms link (from index 32 to 48)
         ClickableSpan termsClick = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                openUrl("https://yourwebsite.com/terms"); // Replace with your terms URL
+                openUrl("https://yourwebsite.com/terms");
             }
         };
 
-        // Privacy link (from index 53 to 67)
         ClickableSpan privacyClick = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                openUrl("https://yourwebsite.com/privacy"); // Replace with your privacy URL
+                openUrl("https://yourwebsite.com/privacy");
             }
         };
 

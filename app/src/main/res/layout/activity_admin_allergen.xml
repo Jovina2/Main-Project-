@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#06120B"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- PAGE TITLE -->
+    <TextView
+        android:text="User Allergy Profile Database"
+        android:textColor="#1AFF4D"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- SUBTITLE -->
+    <TextView
+        android:text="All allergies added by users will appear here"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- ALLERGY LIST -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerAllergens"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

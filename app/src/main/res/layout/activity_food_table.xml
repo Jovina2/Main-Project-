@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#06120B"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/headerFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Back Icon -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_arrow"
+            android:tint="#FFFFFF"/>
+
+        <!-- Title -->
+        <TextView
+            android:layout_marginStart="12dp"
+            android:text="Food Database"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- SEARCH BAR -->
+    <EditText
+        android:id="@+id/searchFood"
+        android:layout_below="@id/headerFood"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Search food..."
+        android:background="@drawable/bg_search"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:padding="14dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#88FFFFFF"
+        android:singleLine="true"/>
+
+    <!-- FOOD LIST -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFood"
+        android:layout_below="@id/searchFood"
+        android:layout_above="@id/btnAddFood"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
+
+    <!-- FLOATING ADD BUTTON -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddFood"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#1AFF4D"
+        app:tint="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

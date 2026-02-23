@@ -2,42 +2,104 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.project">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.PROJECT">
 
-        <!-- Splash Screen -->
+        <!-- 🔹 SPLASH / LAUNCHER (ONLY ONE) -->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.PROJECT">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!-- Welcome Screen -->
         <activity
             android:name=".WelcomeActivity"
-            android:exported="false"/>
+            android:exported="false" />
 
-        <activity android:name=".RegisterActivity" android:exported="false"/>
-        <activity android:name=".LoginActivity" android:exported="false"/>
+        <!-- Login Screen -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
-        <!-- Allergy Profile -->
-        <activity android:name=".AllergyActivity" />
+        <!-- Register Screen -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
+        <!-- Reset Password Screen -->
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+
+        <!-- User Main Screen -->
+        <activity
+            android:name=".AllergyActivity"
+            android:exported="false" />
 
         <!-- Admin Login -->
-        <activity android:name=".AdminActivity" android:exported="false"/>
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+
+        <!-- Admin Dashboard -->
+        <activity
+            android:name=".AdminDashboard"
+            android:exported="false" />
+
+        <!-- Home Dashboard -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+
+        <!-- Food Activity -->
+        <activity
+            android:name=".FoodActivity"
+            android:exported="false"  />
+
+        <!-- Scan Food Activity -->
+        <activity
+            android:name=".ScannerActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Image Upload Activity -->
+        <activity
+            android:name=".ImageActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Food Table -->
+        <activity
+            android:name=".FoodTable"
+            android:exported="false"  />
+
+        <!-- Admin Allergen-->
+        <activity
+            android:name=".AdminAllergenActivity"
+            android:exported="false"  />
+
+        <!-- PredictionResult-->
+        <activity
+            android:name=".PredictionResult"
+            android:exported="false"  />
 
     </application>
-
 </manifest>
