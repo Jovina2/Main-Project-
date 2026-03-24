@@ -133,13 +133,12 @@
                 android:layout_marginBottom="8dp" />
 
             <!-- PLACEHOLDER -->
-            <TextView
+            <ListView
+                android:id="@+id/recentListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No recent scans yet"
-                android:textColor="#AAAAAA"
-                android:gravity="center"
-                android:padding="16dp" />
+                android:divider="@android:color/transparent"
+                android:dividerHeight="8dp"/>
 
         </LinearLayout>
     </ScrollView>

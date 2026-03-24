@@ -32,8 +32,8 @@ public class AllergyActivity extends AppCompatActivity {
     AutoCompleteTextView edtSearch;
     int userId;
 
-    private final String SAVE_ALLERGY_URL = "http://192.168.1.208:5000/save_allergy";
-    private final String GET_ALLERGY_URL = "http://192.168.1.208:5000/get_allergy/";
+    private final String SAVE_ALLERGY_URL = "http://192.168.1.44:5000/save_allergy";
+    private final String GET_ALLERGY_URL = "http://192.168.1.44:5000/get_allergy/";
 
     // Suggestions for common allergens
     private final String[] commonAllergens = {"Peanuts", "Soy", "Milk", "Eggs", "Wheat", "Fish", "Shellfish"};

@@ -1,9 +1,11 @@
 package com.example.project;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Button;
@@ -26,6 +28,17 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Vibrator;
+import android.content.Context;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 
 public class PredictionResult extends AppCompatActivity {
 
@@ -36,6 +49,8 @@ public class PredictionResult extends AppCompatActivity {
     ProgressBar progressConfidence;
     Button btnReport, btnScanAgain;
 
+    String foodName="";
+    String result="";
     int userId = -1;
     Bitmap selectedBitmap = null;
 
@@ -61,7 +76,7 @@ public class PredictionResult extends AppCompatActivity {
         // ---------------- Receive Intent ----------------
         Intent intent = getIntent();
 
-        String foodName = intent.getStringExtra("foodName");
+        foodName = intent.getStringExtra("foodName");
         String barcode = intent.getStringExtra("barcode");
         String username = intent.getStringExtra("username");
 
@@ -124,12 +139,17 @@ public class PredictionResult extends AppCompatActivity {
             finish();
         });
 
-        // ---------------- Report Button ----------------
-        btnReport.setOnClickListener(v ->
-                Toast.makeText(this, "Report submitted successfully!", Toast.LENGTH_SHORT).show()
-        );
-    }
+        // ---------------- Save Button ----------------
+        btnReport = findViewById(R.id.btnReport);
 
+        btnReport.setOnClickListener(view -> {
+            if (PredictionResult.this.foodName != null && PredictionResult.this.result != null) {
+                saveResult(PredictionResult.this.foodName, PredictionResult.this.result);
+            } else {
+                Toast.makeText(PredictionResult.this, "Prediction not ready yet!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     // ---------------- Show Error ----------------
     private void showError(String message) {
         txtRisk.setText("ERROR");
@@ -148,7 +168,7 @@ public class PredictionResult extends AppCompatActivity {
     // ---------------- Text Prediction ----------------
     private void callPredictionAPI(String foodName, int userId) {
 
-        String url = "http://192.168.1.208:5000/predict";
+        String url = "http://192.168.1.44:5000/predict";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -179,7 +199,7 @@ public class PredictionResult extends AppCompatActivity {
     // ---------------- Image Prediction ----------------
     private void callPredictionAPIWithImage(Bitmap bitmap, int userId) {
 
-        String url = "http://192.168.1.208:5000/predict_image";
+        String url = "http://192.168.1.44:5000/predict_image";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -213,7 +233,7 @@ public class PredictionResult extends AppCompatActivity {
     // ---------------- Barcode Lookup ----------------
     private void callBarcodeAPI(String barcode, int userId) {
 
-        String url = "http://192.168.1.208:5000/barcode_lookup";
+        String url = "http://192.168.1.44:5000/barcode_lookup";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -268,6 +288,7 @@ public class PredictionResult extends AppCompatActivity {
 
             // Extract Values
             String risk = response.optString("risk", "UNKNOWN");
+            this.result = risk;
 
             int probability = response.optInt("probability", 0);
 
@@ -296,7 +317,7 @@ public class PredictionResult extends AppCompatActivity {
             }
 
             // Food Name
-            String foodName = response.optString(
+            this.foodName = response.optString(
                     "foodName",
                     response.optString("foodDetected", "Unknown Food")
             );
@@ -324,7 +345,37 @@ public class PredictionResult extends AppCompatActivity {
 
                 txtTriggerLevel.setText("🚨 HIGH Allergy Risk!");
             }
+            //full alert
+            if (risk.toUpperCase().contains("HIGH") || risk.toUpperCase().contains("MODERATE")) {
 
+                String message = response.optString("message", "Allergy risk detected!");
+
+                showRiskAlert(risk, message);
+
+                final String finalFoodName = foodName;
+                final String finalTriggerText = triggerText;
+                final String finalRisk = risk;
+                final String finalMessage = message;
+
+                new AlertDialog.Builder(this)
+                        .setTitle(risk.equalsIgnoreCase("HIGH") ?
+                                "🚨 HIGH Allergy Risk" :
+                                "⚠ Moderate Allergy Risk")
+                        .setMessage(message)
+                        .setPositiveButton("View Details", (dialog, which) -> {
+                            Intent intent = new Intent(PredictionResult.this, DangerAlertActivity.class);
+
+                            intent.putExtra("user_id", userId);
+                            intent.putExtra("risk", finalRisk);
+                            intent.putExtra("message", finalMessage);
+                            intent.putExtra("foodName", finalFoodName);
+                            intent.putExtra("allergens", finalTriggerText);
+
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
             // Load Product Image if URL Exists
             String imageUrl = response.optString("imageUrl", "");
 
@@ -338,6 +389,93 @@ public class PredictionResult extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             showError("Response Parsing Failed!");
+        }
+    }
+
+    //Notifications
+    private void showRiskAlert(String risk, String message) {
+
+        boolean isHigh = risk.toUpperCase().contains("HIGH");
+
+        // 🔊 Sound
+        try {
+            Uri soundUri = isHigh
+                    ? RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                    : RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+            ringtone.play();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 📳 Vibrate (long for HIGH, short for MODERATE)
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                if (isHigh) {
+                    vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+
+            } else {
+                vibrator.vibrate(isHigh ? 1500 : 500);
+            }
+        }
+        // 🔔 Notification Channel
+        String channelId = "allergy_alert_channel";
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Allergy Alerts",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+
+        // 🔔 Notification
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this, channelId)
+                        .setSmallIcon(R.drawable.ic_warning)
+                        .setContentTitle(isHigh ? "🚨 HIGH Allergy Risk!" : "⚠ Moderate Allergy Risk")
+                        .setContentText(message)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setAutoCancel(true);
+
+        NotificationManagerCompat.from(this).notify(1, builder.build());
+    }
+    private void saveResult(String foodName, String result) {
+
+        String url = "http://192.168.1.44:5000/save_analysis";
+
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("user_id", userId);   // Use logged-in ID
+            jsonObject.put("food_name", foodName);
+            jsonObject.put("result", result);
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    jsonObject,
+                    response -> {
+                        Toast.makeText(this, "Result Saved Successfully", Toast.LENGTH_SHORT).show();
+                    },
+                    error -> {
+                        Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
+                    }
+            );
+
+            Volley.newRequestQueue(this).add(request);} catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -92,7 +92,7 @@ public class FoodActivity extends AppCompatActivity {
         updateRecentChecks(foodName);
 
         // ✅ Flask Backend URL
-        String url = "http://192.168.1.208:5000/predict";
+        String url = "http://192.168.1.44:5000/predict";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

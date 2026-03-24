@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#0B2E1A"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/txtGreeting"
+        android:text="Hi,\nHere are your safe picks."
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Search -->
+    <EditText
+        android:id="@+id/searchFood"
+        android:hint="Search cravings for safe versions..."
+        android:background="@drawable/search_bg"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#88FFFFFF"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <!-- Smart Swaps Title -->
+    <TextView
+        android:text="Smart Swaps"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRecommendations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"/>
+
+</LinearLayout>

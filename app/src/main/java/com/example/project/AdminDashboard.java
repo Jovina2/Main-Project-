@@ -23,7 +23,6 @@ public class AdminDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dashboard);
-
         // Card Clicks
         findViewById(R.id.cardFood).setOnClickListener(v -> {
             Intent intent = new Intent(AdminDashboard.this, FoodTable.class);
@@ -35,14 +34,20 @@ public class AdminDashboard extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.cardProfiles).setOnClickListener(v -> {
+            startActivity(new Intent(AdminDashboard.this, AdminUserProfileActivity.class));
+        });
+
+        findViewById(R.id.cardIngredients).setOnClickListener(v -> {
+            startActivity(new Intent(AdminDashboard.this, AdminIngredients.class));
+        });
+
         // Bottom Navigation
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_dashboard);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_dashboard) return true;
-            else if (id == R.id.nav_database) return true;
-            else if (id == R.id.nav_users) return true;
             else if (id == R.id.nav_settings) return true;
             return false;
         });
@@ -59,7 +64,7 @@ public class AdminDashboard extends AppCompatActivity {
     }
 
     private void fetchDashboardStats() {
-        String url = "http://192.168.1.208:5000/admin/dashboard_stats"; // Flask endpoint
+        String url = "http://192.168.1.44:5000/admin/dashboard_stats"; // Flask endpoint
 
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 response -> {

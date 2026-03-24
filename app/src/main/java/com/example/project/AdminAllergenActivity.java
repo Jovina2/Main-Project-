@@ -22,7 +22,7 @@ public class AdminAllergenActivity extends AppCompatActivity {
     ArrayList<AllergyModel> allergyList;
     AllergenAdapter adapter;
 
-    String URL_FETCH = "http://192.168.1.208:5000/admin/allergy_database";
+    String URL_FETCH = "http://192.168.1.44:5000/admin/allergy_database";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

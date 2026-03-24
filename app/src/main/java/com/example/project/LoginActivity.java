@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtEmail, edtPassword;
     Button btnLogin;
 
-    private final String LOGIN_URL = "http://192.168.1.208:5000/login";
+    private final String LOGIN_URL = "http://192.168.1.44:5000/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,4 +95,5 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
+
 }

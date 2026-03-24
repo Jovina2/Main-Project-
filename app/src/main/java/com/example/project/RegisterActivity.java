@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView txtLogin;
 
     boolean isPasswordVisible = false;
-    private final String REGISTER_URL = "http://192.168.1.208:5000/register";
+    private final String REGISTER_URL = "http://192.168.1.44:5000/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

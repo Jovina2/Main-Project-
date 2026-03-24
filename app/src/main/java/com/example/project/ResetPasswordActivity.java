@@ -21,7 +21,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     EditText edtEmail, edtNewPassword, edtConfirmPassword;
     Button btnUpdatePassword;
 
-    private final String RESET_PASSWORD_URL = "http://192.168.1.208:5000/reset-password";
+    private final String RESET_PASSWORD_URL = "http://192.168.1.44:5000/reset-password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

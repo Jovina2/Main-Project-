@@ -41,8 +41,8 @@ public class FoodTable extends AppCompatActivity {
     ArrayList<FoodModel> foodList;
     FoodAdapter adapter;
 
-    String URL_FETCH = "http://192.168.1.208:5000/admin/food_database";
-    String URL_ADD   = "http://192.168.1.208:5000/food/add";
+    String URL_FETCH = "http://192.168.1.44:5000/admin/food_database";
+    String URL_ADD   = "http://192.168.1.44:5000/food/add";
 
     String selectedBarcode = "";
     String selectedImageBase64 = "";

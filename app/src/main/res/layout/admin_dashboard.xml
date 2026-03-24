@@ -161,7 +161,7 @@
                     android:layout_weight="1"/>
 
                 <include
-                    android:id="@+id/cardUsers"
+                    android:id="@+id/cardProfiles"
                     layout="@layout/card_users"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
